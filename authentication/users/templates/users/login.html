@@ -1,0 +1,23 @@
+{% extends 'users/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <div class="container">
+        <h1> Login </h1>
+        <form method="POST"class = "d-inline">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+    </div>
+
+    <hr class = "container">
+
+    <div class = "container" style="text-align: right;">
+        <a href="{% url 'register' %}" style="text-decoration: none;"> Don't have an account? Register here </a>
+        <br>
+        <a href="{% url 'password_reset' %}" style="text-decoration: none;">Forgot Password?</a>
+    </div>
+
+{% endblock content %} 

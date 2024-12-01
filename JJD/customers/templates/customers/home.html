@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Home</title>
+    </head>
+    <body>
+        <h1>Welcome Customer</h1>
+        <p>You are logged in as {{ user.username }}</p>
+        <form method="post" action="{% url 'logout' %}" class="d-inline">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-outline-primary">Logout</button>
+        </form>
+    </body>
+</html>

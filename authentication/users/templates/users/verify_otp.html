@@ -1,0 +1,46 @@
+{% extends 'users/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container">
+    <h1> OTP Verification </h1>
+    <form method="POST" class="d-inline">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-primary">Verify</button>
+    </form>
+    {% if otp %}
+        <p>For testing purposes, your OTP is: <strong>{{ otp }}</strong></p>
+        <p>Your OTP will expire in: <strong id="countdown"></strong></p>
+    {% endif %}
+</div>
+
+<hr class="container">
+
+<script>
+    // JavaScript to handle the countdown timer
+    document.addEventListener('DOMContentLoaded', function() {
+        var expirationTime = new Date("{{ otp_expiration_time|date:'Y-m-d H:i:s' }}").getTime();
+        var countdownElement = document.getElementById('countdown');
+
+        function updateCountdown() {
+            var now = new Date().getTime();
+            var distance = expirationTime - now;
+
+            if (distance < 0) {
+                countdownElement.innerHTML = "Expired";
+                return;
+            }
+
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            countdownElement.innerHTML = minutes + "m " + seconds + "s ";
+        }
+
+        setInterval(updateCountdown, 1000);
+    });
+</script>
+
+{% endblock content %}

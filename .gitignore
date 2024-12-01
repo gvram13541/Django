@@ -1,0 +1,22 @@
+myenv/
+credentials.txt
+timetables.xlsx
+main.py
+
+# authentication ignore files
+/authentication/authentication/__pycache__/
+/authentication/db.sqlite3
+/authentication/users/migrations/
+/authentication/users/__pycache__/
+
+# django project ignore files
+/django_project/users/migrations/
+/django_project/users/__pycache__/
+/django_project/django_project/__pycache__/
+/django_project/blog/__pycache__/
+/django_project/blog/migrations/
+
+# jjd ignore files
+/jjd/customers/__pycache__/
+/jjd/customers/migrations/
+/jjd/jjd/__pycache__/
