@@ -13,7 +13,7 @@ class CustomerRegistrationForm(forms.ModelForm):
         model = Customer
         fields = ['name', 'phone', 'email', 'village', 'district', 'state', 'country', 'pincode', 'role', 'password']
         widgets = {
-            'role': forms.RadioSelect(choices=Customer.ROLE_CHOICES, default='buyer'),
+            'role': forms.RadioSelect(choices=Customer.ROLE_CHOICES),
             'email': forms.EmailInput(),
             'pincode': forms.NumberInput(),
             'password': forms.PasswordInput(attrs={'placeholder': 'Enter Password'}),
@@ -31,7 +31,6 @@ class CustomerRegistrationForm(forms.ModelForm):
     def save(self, commit=True):
         customer = super().save(commit=False)
         customer.password = make_password(self.cleaned_data['password'])
-        customer.role = 'buyer'
         if commit:
             customer.save()
         return customer

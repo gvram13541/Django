@@ -1,6 +1,6 @@
 myenv/
-credentials.txt
-timetables.xlsx
+credentials
+timetable
 main.py
 
 # authentication ignore files
@@ -20,3 +20,7 @@ main.py
 /jjd/customers/__pycache__/
 /jjd/customers/migrations/
 /jjd/jjd/__pycache__/
+
+
+# frontend ignore files
+/jjd/frontend/node_modules/
