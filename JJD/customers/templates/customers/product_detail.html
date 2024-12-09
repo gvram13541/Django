@@ -1,26 +1,26 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
 
-<html>
-    <head>
-        <title>Home</title>
-    </head>
-    <body>
-        <h1>{{product.name}}</h1>
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h1>{{ product.name }}</h1>
         <div>
-            <ul>
-                    <li>
-                        Name: {{product.name}}
-                    </li>
-                    <li>
-                        Cost: {{product.price}}
-                    </li>
-                    <li>
-                        Image:<img src="{{ product.image.url }}" alt="{{ product.name }}">
-                    </li>
-                    <li>
-                        Quantity Available: {{product.quantity}}
-                    </li>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <strong>Name:</strong> {{ product.name }}
+                </li>
+                <li class="list-group-item">
+                    <strong>Cost:</strong> ${{ product.price }}
+                </li>
+                <li class="list-group-item">
+                    <strong>Image:</strong>
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid">
+                </li>
+                <li class="list-group-item">
+                    <strong>Quantity Available:</strong> {{ product.quantity }}
+                </li>
             </ul>
         </div>
-    </body>
-</html>
+    </div>
+{% endblock %}

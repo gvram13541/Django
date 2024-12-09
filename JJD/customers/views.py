@@ -117,6 +117,12 @@ def place_order(request):
     request.session['cart'] = {}
     messages.success(request, 'Order placed successfully!')
     return render(request, 'customers/order_placed.html', {'orders': orders, 'total_cost': total_cost})
+
+@login_required
+def order_summary(request):
+    orders = Order.objects.filter(user=request.user, status='pending')
+    total_cost = sum(order.product.price * order.quantity for order in orders)
+    return render(request, 'customers/order_summary.html', {'orders': orders, 'total_cost': total_cost})
     
 
 # def login(request):

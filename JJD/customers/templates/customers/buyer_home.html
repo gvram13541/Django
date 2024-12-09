@@ -1,31 +1,29 @@
-<!DOCTYPE html>
+{% extends 'customers/base.html' %}
 
-<html>
-    <head>
-        <title>Home</title>
-    </head>
-    <body>
-        <h1>Welcome Buyer</h1>
-        <p>You are logged in as {{ user.username }}</p>
-        <form method="post" action="{% url 'logout' %}" class="d-inline">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-outline-primary">Logout</button>
-        </form>
-        <div>
-            <h2>Products</h2>
-            <ul>
-                {% for product in products %}
-                    <li>
-                        <a href="{% url 'product_detail' product.id %}">{{ product.name }}</a>
-                        <a href="{% url 'add_to_cart' product.id %}"> Add to Cart </a>
-                        <a href="{% url 'remove_from_cart' product.id %}"> Remove from Cart </a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
-        <div>
-        <div>
-            <a href="{% url 'view_cart'%}"> View Cart </a>
-        </div>
-    </body>
-</html>
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <h1>Welcome Buyer</h1>
+    <p>You are logged in as {{ user.username }}</p>
+    <form method="post" action="{% url 'logout' %}" class="d-inline">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-outline-primary">Logout</button>
+    </form>
+    <div class="mt-4">
+        <h2>Products</h2>
+        <ul class="list-group">
+            {% for product in products %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <a href="{% url 'product_detail' product.id %}">{{ product.name }}</a>
+                    <div>
+                        <a href="{% url 'add_to_cart' product.id %}" class="btn btn-sm btn-success">Add to Cart</a>
+                        <a href="{% url 'remove_from_cart' product.id %}" class="btn btn-sm btn-danger">Remove from Cart</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="mt-4">
+        <a href="{% url 'view_cart' %}" class="btn btn-primary">View Cart</a>
+    </div>
+{% endblock %}

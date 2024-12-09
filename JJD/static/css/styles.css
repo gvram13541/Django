@@ -1,301 +1,219 @@
-/* Global Styles */
-body {
-    color: #007BFF;
+/* Custom CSS with Enhanced Design */
+:root {
+    /* Color Palette */
+    --primary-color: #3498db;
+    --secondary-color: #2ecc71;
+    --accent-color: #e74c3c;
+    --dark-color: #2c3e50;
+    --light-color: #ecf0f1;
+    --gray-color: #95a5a6;
+
+    /* Typography */
+    --font-primary: 'Inter', 'Segoe UI', Roboto, sans-serif;
+    --font-secondary: 'Poppins', Arial, sans-serif;
+
+    /* Shadows and Transitions */
+    --box-shadow-subtle: 0 4px 6px rgba(0, 0, 0, 0.05);
+    --box-shadow-medium: 0 10px 20px rgba(0, 0, 0, 0.1);
+    --box-shadow-strong: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+/* Global Reset and Base Styles */
+*, 
+*::before, 
+*::after {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-/* Logo Section */
-.logojjd {
-    position: relative;
-    display: inline-block;
-    text-align: center;
+body {
+    font-family: var(--font-primary);
+    line-height: 1.6;
+    color: var(--dark-color);
+    background-color: var(--light-color);
+    overflow-x: hidden;
 }
 
-.logojjd img {
-    width: 70px;
-    height: 70px;
-    border: 3px solid #007BFF; /* Matches the blue theme */
-    border-radius: 50%; /* Circular image */
-    margin-right: 10px;
-    box-shadow: 0 2px 5px rgba(0, 123, 255, 0.3); /* Adds subtle shadow for depth */
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Hover effect */
-}
-
-.logojjd img:hover {
-    transform: scale(1.1); /* Enlarge slightly on hover */
-    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4); /* Enhance shadow */
-}
-
-.logo_text {
-    position: absolute;
-    bottom: -8px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: white; /* White background for contrast */
-    padding: 2px 10px;
-    font-size: 14px;
-    font-weight: bold;
-    color: #007BFF; /* Primary blue color */
-    border-radius: 12px;
-    border: 1px solid #007BFF;
-    text-transform: uppercase;
-    transition: all 0.3s ease-in-out; /* Smooth hover effect */
-}
-
-.logo_text:hover {
-    background-color: #007BFF; /* Invert colors on hover */
-    color: white;
-}
-
-/* JJ Diaries Title */
-a .d-block {
-    color: #007BFF; /* Matches the blue theme */
-    font-size: 18px;
-    font-weight: bold;
-    text-align: center;
-    margin-top: 10px;
-    transition: all 0.3s ease-in-out; /* Smooth hover effect */
-}
-
-a:hover .d-block {
-    color: #0056b3; /* Darker blue on hover */
-    text-decoration: none; /* Optional underline effect */
-}
-
-/* Navbar Container */
-.navbar-nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    list-style: none;
-    padding-left: 0;
-    margin-bottom: 0;
-}
-
-/* Navbar Links */
-.navbar-nav .nav-link {
-    padding: 0.5rem 1rem;
-    color: #007BFF; /* Default blue color for links */
-    font-weight: 500;
-    text-transform: uppercase;
-    transition: color 0.3s ease-in-out;
-}
-
-.navbar-nav .nav-link:hover {
-    color: #0056b3; /* Darker blue on hover */
-}
-
-/* Additional Spacing for Links */
-.navbar-nav .nav-item {
-    margin-right: 20px;
-}
-
-.navbar-nav .nav-item:last-child {
-    margin-right: 0; /* No margin on the last item */
-}
-
-/* Button Container */
-.col-md-3.text-end {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-}
-
-/* Buttons */
-.btn-outline-primary {
-    border-color: #007BFF;
-    color: #007BFF;
-    font-weight: 500;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.btn-outline-primary:hover {
-    background-color: #007BFF;
-    color: white; /* White text on hover */
-}
-
-.btn-primary {
-    background-color: #007BFF;
-    color: white;
-    font-weight: 500;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.btn-primary:hover {
-    background-color: #0056b3; /* Darker blue on hover */
-    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3); /* Slight shadow effect on hover */
-}
-
-/* Margin for Buttons */
-.btn-outline-primary.me-2 {
-    margin-right: 10px; /* Space between login and register buttons */
-}
-
-/* Container for the Welcome Section */
-.px-4.py-5.my-5.text-center {
-    background-color: #f8f9fa; /* Light background for the section */
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    padding: 5rem 1rem;
-    margin: 2rem 0;
-}
-
-/* Logo Image */
-.px-4.py-5.my-5.text-center img {
-    border-radius: 50%;
-    width: 100px;
-    height: 100px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2); /* Subtle shadow for the logo */
-}
-
-/* Heading */
-.px-4.py-5.my-5.text-center h1 {
-    font-size: 3rem; /* Large size for the heading */
-    color: #333; /* Dark text color */
+/* Typography */
+h1, h2, h3, h4, h5 {
+    font-family: var(--font-secondary);
     font-weight: 700;
-    text-transform: uppercase; /* All caps for emphasis */
-    margin-bottom: 1rem;
+    color: var(--dark-color);
 }
 
-/* Subheading */
-.px-4.py-5.my-5.text-center .lead {
-    font-size: 1.25rem;
-    color: #555; /* Slightly lighter color for subheading */
-    margin-bottom: 1.5rem;
-}
-
-/* Button Container */
-.d-grid.gap-2.d-sm-flex.justify-content-sm-center {
-    display: flex;
-    justify-content: center;
-    gap: 1rem; /* Space between the buttons */
-}
-
-/* Button Styles */
-.btn-primary,
-.btn-outline-secondary {
-    font-size: 1.1rem;
-    padding: 0.75rem 2rem;
-    border-radius: 50px; /* Rounded buttons */
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
-}
-
-/* Primary Button */
-.btn-primary {
-    background-color: #007BFF;
-    color: white;
-    border: none;
-}
-
-.btn-primary:hover {
-    background-color: #0056b3;
-    transform: translateY(-2px); /* Slight raise effect on hover */
-}
-
-.btn-outline-secondary {
-    background-color: transparent;
-    border-color: #6c757d;
-    color: #6c757d;
-}
-
-.btn-outline-secondary:hover {
-    background-color: #6c757d;
-    color: white;
-    transform: translateY(-2px);
-}
-
-/* Button Large Size */
-.btn-lg {
-    font-size: 1.1rem;
-    padding: 0.75rem 2rem;
-}
-
-/* Section Container for Features */
-#featured-3 {
-    background-color: #f8f9fa; /* Light background for consistency */
-    padding: 5rem 1rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
-    margin: 2rem 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap; /* Allows features to wrap to the next line */
-    gap: 2rem; /* Adds space between feature cards */
-}
-
-/* Title for Features Section */
-#featured-3 h2 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #333;
-    text-align: center;
-    margin-bottom: 2rem;
-    border-bottom: 2px solid #007bff; /* Border under title */
-    padding-bottom: 10px;
-}
-
-/* Feature Cards */
-.feature {
+/* Navigation Styling */
+.navbar {
     background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 2rem;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    width: calc(33.333% - 2rem); /* Ensures three columns on large screens */
-    margin: 0.5rem;
+    box-shadow: var(--box-shadow-subtle);
+    transition: all 0.3s ease;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    color: var(--primary-color);
+    letter-spacing: -0.5px;
+}
+
+.nav-link {
+    position: relative;
+    color: var(--dark-color);
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
     width: 100%;
 }
 
-/* Icon in Feature Cards */
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, 
+        rgba(52, 152, 219, 0.1) 0%, 
+        rgba(46, 204, 113, 0.1) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+        circle at center, 
+        rgba(52, 152, 219, 0.05) 0%, 
+        transparent 70%
+    );
+    z-index: 1;
+}
+
+/* Feature Cards */
+.feature-card {
+    background-color: white;
+    border: none;
+    border-radius: 15px;
+    transition: all 0.4s ease;
+    box-shadow: var(--box-shadow-subtle);
+    overflow: hidden;
+}
+
+.feature-card:hover {
+    transform: translateY(-15px);
+    box-shadow: var(--box-shadow-medium);
+}
+
 .feature-icon {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background-color: #007bff;
-    color: white;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1.5rem;
-    font-size: 2rem;
-    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2); /* Subtle shadow for the icon */
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    transition: transform 0.3s ease;
 }
 
-/* Feature Title */
-.feature h3 {
-    font-size: 1.75rem;
-    color: #333;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    text-transform: uppercase; /* All caps for emphasis */
+.feature-card:hover .feature-icon {
+    transform: rotate(15deg);
 }
 
-/* Feature Description */
-.feature p {
-    color: #555;
-    font-size: 1.1rem;
-    line-height: 1.5;
+/* Pricing Section */
+.pricing-section {
+    background-color: var(--light-color);
 }
 
-/* Hover Effect for Feature Cards */
-.feature:hover {
-    transform: translateY(-5px); /* Raise effect on hover */
-    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.2); /* Stronger shadow on hover */
+.pricing-section .card {
+    border-radius: 15px;
+    border: 2px solid transparent;
+    transition: all 0.4s ease;
+    box-shadow: var(--box-shadow-subtle);
 }
 
-/* Responsive Design */
+.pricing-section .card:hover {
+    border-color: var(--primary-color);
+    transform: scale(1.05);
+    box-shadow: var(--box-shadow-strong);
+}
+
+/* Testimonials */
+.testimonial-card {
+    background-color: white;
+    border-radius: 15px;
+    transition: all 0.4s ease;
+    box-shadow: var(--box-shadow-subtle);
+}
+
+.testimonial-card img {
+    border: 3px solid var(--primary-color);
+    transition: transform 0.3s ease;
+}
+
+.testimonial-card:hover img {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* Footer */
+footer {
+    background-color: var(--dark-color);
+    color: var(--light-color);
+    padding: 4rem 0;
+}
+
+footer a {
+    color: var(--light-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: var(--primary-color);
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: darken(var(--primary-color), 10%);
+    transform: translateY(-3px);
+    box-shadow: var(--box-shadow-medium);
+}
+
+/* Responsive Adjustments */
 @media (max-width: 768px) {
-    .feature {
-        width: calc(50% - 1rem); /* Two columns on medium screens */
+    .hero-section, 
+    .feature-card, 
+    .pricing-section .card,
+    .testimonial-card {
+        margin-bottom: 1.5rem;
     }
 }
 
-@media (max-width: 480px) {
-    .feature {
-        width: 100%; /* One column on small screens */
-    }
+/* Animations */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+}
+
+.floating-element {
+    animation: float 4s ease-in-out infinite;
+}
+
+/* Additional Utilities */
+.text-gradient {
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    color: transparent;
 }

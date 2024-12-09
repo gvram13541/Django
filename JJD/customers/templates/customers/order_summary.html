@@ -1,0 +1,21 @@
+{% extends 'customers/base.html' %}
+
+{% block title %}Order Summary{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h1>Order Summary</h1>
+        <ul class="list-group">
+            {% for order in orders %}
+                <li class="list-group-item">
+                    <strong>Product:</strong> {{ order.product.name }}<br>
+                    <strong>Quantity:</strong> {{ order.quantity }}<br>
+                    <strong>Price:</strong> ${{ order.product.price|floatformat:2 }}<br>
+                    <strong>Subtotal:</strong> ${{ order.quantity|multiply:order.product.price|floatformat:2 }}<br>
+                </li>
+            {% endfor %}
+        </ul>
+        <h3 class="mt-4">Total Cost: ${{ total_cost|floatformat:2 }}</h3>
+        <a href="{% url 'buyer_home' %}" class="btn btn-primary mt-3">Continue Shopping</a>
+    </div>
+{% endblock %}

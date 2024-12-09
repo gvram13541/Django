@@ -1,21 +1,23 @@
-<!DOCTYPE html>
+{% extends 'customers/base.html' %}
 
-<html>
-    <head>
-        <title>cart</title>
-    </head>
-    <body>
-        <h1>Items in cart</h1>
-        <div>
-            <ul>
+{% block title %}Cart{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h1>Items in Cart</h1>
+        {% if products %}
+            <ul class="list-group">
                 {% for product in products %}
-                    <li>
+                    <li class="list-group-item">
                         <a href="{% url 'product_detail' product.id %}">{{ product.name }}</a>
                     </li>
-                    {% endfor %}
-                </ul>
+                {% endfor %}
+            </ul>
+            <div class="mt-4">
+                <a href="{% url 'place_order' %}" class="btn btn-primary">Place Order</a>
             </div>
-            <div>
-            <a href="{% url 'place_order' %}"> Place Order </a>
-    </body>
-</html>
+        {% else %}
+            <p>No items in cart.</p>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,19 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Register Customer</title>
-</head>
-<body>
+{% extends 'customers/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Register Customer{% endblock %}
+
+{% block content %}
     <h1>Customer Registration</h1>
     {% if messages %}
         {% for message in messages %}
-            <p>{{ message }}</p>
+            <div class="alert alert-info">{{ message }}</div>
         {% endfor %}
     {% endif %}
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Register</button>
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-primary">Register</button>
     </form>
-</body>
-</html>
+{% endblock %}

@@ -7,180 +7,242 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap demo</title>
     <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   </head>
   <body>
-    <nav>
-        <div class="container">
-            <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-              <div class="col-md-3 mb-2 mb-md-0 text-center">
-                <a href="/" class="d-inline-flex align-items-center justify-content-center link-body-emphasis text-decoration-none" style="text-decoration: none;">
-                    <div class = "logojjd">
-                        <img src="{% static 'logo.jpg' %}" alt="JJD" class="rounded-circle shadow">
-                        <span class = "logo_text"> JJD </span>
-                    </div>
-                    <div class="d-block mt-3" style="color: #007BFF; font-size: 18px; font-weight: bold;">
-                        JJ Diaries
-                    </div>
-                </a>
-              </div>            
-        
-              <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="{% url 'home' %}" class="nav-link px-2 link-secondary">Home</a></li>
-                <li><a href="#featured-3" class="nav-link px-2">Features</a></li>
-                <li><a href="#pricing" class="nav-link px-2">Pricing</a></li>
-                <li><a href="#testimonials" class="nav-link px-2">Testimonials</a></li>
-                <li><a href="#contact" class="nav-link px-2">Contact Us</a></li>
-              </ul>
-        
-              <div class="col-md-3 text-end">
-                <a class="btn btn-outline-primary me-2" href="{% url 'login' %}">Login</a>
-                <a class="btn btn-primary" href="{% url 'register' %}">Register</a>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+            <div class="container">
+              <a href="/" class="navbar-brand d-flex align-items-center">
+                <img src="{% static 'images/logo.jpg' %}" alt="JJD" class="rounded-circle me-2" width="50" height="50">
+                <span class="fw-bold text-primary">JJ Diaries</span>
+              </a>
+              
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                  <li class="nav-item"><a href="{% url 'home' %}" class="nav-link">Home</a></li>
+                  <li class="nav-item"><a href="#features" class="nav-link">Features</a></li>
+                  <li class="nav-item"><a href="#pricing" class="nav-link">Pricing</a></li>
+                  <li class="nav-item"><a href="#testimonials" class="nav-link">Testimonials</a></li>
+                  <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+                
+                <div class="d-flex">
+                    {% if user.is_authenticated %}
+                      <a href="#" class="btn btn-outline-primary me-2">Profile</a>
+                      <form method="post" action="{% url 'logout' %}" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary">Logout</button>
+                      </form>
+                    {% else %}
+                      <a href="{% url 'login' %}" class="btn btn-outline-primary me-2">Login</a>
+                      <a href="{% url 'register' %}" class="btn btn-primary">Register</a>
+                    {% endif %}
+                  </div>
               </div>
-            </header>
-          </div>
-    </nav>
+            </div>
+          </nav>
 
     <main>
-        <div class="px-4 py-5 my-5 text-center">
-            <img class="d-block mx-auto mb-4" src="{% static 'logo.jpg' %}" alt="" width="100" height="100" style="border-radius: 50%;">
-            <h1 class="display-5 fw-bold text-body-emphasis">Welcome to JJD!</h1>
-            <div class="col-lg-6 mx-auto">
-              <p class="lead mb-4">Cusotmers Happiness to Our Happiness</p>
-              <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                <a class="btn btn-primary btn-lg px-4 gap-3" href="{% url 'login' %}">Login</a>
-                <a class="btn btn-outline-secondary btn-lg px-4" href="{% url 'register' %}">Register</a>
+        <section class="hero-section text-center bg-light py-5">
+            <div class="container">
+              <img src="{% static 'images/logo.jpg' %}" alt="JJD Logo" class="rounded-circle mb-4" width="150" height="150">
+              
+              <h1 class="display-4 fw-bold text-primary mb-3">Welcome to JJ Diaries</h1>
+              
+              <p class="lead text-muted mb-4">Customer Happiness is Our Happiness</p>
+              
+              <div class="d-flex justify-content-center gap-3">
+                {% if user.is_authenticated %}
+                  <a href="#" class="btn btn-outline-primary btn-lg">Profile</a>
+                  <form method="post" action="{% url 'logout' %}" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary btn-lg">Logout</button>
+                  </form>
+                {% else %}
+                  <a href="{% url 'login' %}" class="btn btn-primary btn-lg">Login</a>
+                  <a href="{% url 'register' %}" class="btn btn-outline-primary btn-lg">Register</a>
+                {% endif %}
               </div>
             </div>
-          </div>
+          </section>
 
-          <div class="container px-4 py-5" id="featured-3">
-            <h2 class="pb-2 border-bottom">Our Features</h2>
-            <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
-              <div class="feature col">
-                <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
-                  <svg class="bi" width="1em" height="1em"><use xlink:href="#collection"/></svg>
-                </div>
-                <h3 class="fs-2 text-body-emphasis">Featured title</h3>
-                <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-                <a href="#" class="icon-link">
-                  Call to action
-                  <svg class="bi"><use xlink:href="#chevron-right"/></svg>
-                </a>
-              </div>
-              <div class="feature col">
-                <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
-                  <svg class="bi" width="1em" height="1em"><use xlink:href="#people-circle"/></svg>
-                </div>
-                <h3 class="fs-2 text-body-emphasis">Featured title</h3>
-                <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-                <a href="#" class="icon-link">
-                  Call to action
-                  <svg class="bi"><use xlink:href="#chevron-right"/></svg>
-                </a>
-              </div>
-              <div class="feature col">
-                <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
-                  <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"/></svg>
-                </div>
-                <h3 class="fs-2 text-body-emphasis">Featured title</h3>
-                <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-                <a href="#" class="icon-link">
-                  Call to action
-                  <svg class="bi"><use xlink:href="#chevron-right"/></svg>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div class="row row-cols-1 row-cols-md-3 mb-3 text-center" id="pricing">
-            <div class="col">
-              <div class="card mb-4 rounded-3 shadow-sm">
-                <div class="card-header py-3">
-                  <h4 class="my-0 fw-normal">Free</h4>
-                </div>
-                <div class="card-body">
-                  <h1 class="card-title pricing-card-title">$0<small class="text-body-secondary fw-light">/mo</small></h1>
-                  <ul class="list-unstyled mt-3 mb-4">
-                    <li>10 users included</li>
-                    <li>2 GB of storage</li>
-                    <li>Email support</li>
-                    <li>Help center access</li>
-                  </ul>
-                  <button type="button" class="w-100 btn btn-lg btn-outline-primary">Sign up for free</button>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card mb-4 rounded-3 shadow-sm">
-                <div class="card-header py-3">
-                  <h4 class="my-0 fw-normal">Pro</h4>
-                </div>
-                <div class="card-body">
-                  <h1 class="card-title pricing-card-title">$15<small class="text-body-secondary fw-light">/mo</small></h1>
-                  <ul class="list-unstyled mt-3 mb-4">
-                    <li>20 users included</li>
-                    <li>10 GB of storage</li>
-                    <li>Priority email support</li>
-                    <li>Help center access</li>
-                  </ul>
-                  <button type="button" class="w-100 btn btn-lg btn-primary">Get started</button>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card mb-4 rounded-3 shadow-sm border-primary">
-                <div class="card-header py-3 text-bg-primary border-primary">
-                  <h4 class="my-0 fw-normal">Enterprise</h4>
-                </div>
-                <div class="card-body">
-                  <h1 class="card-title pricing-card-title">$29<small class="text-body-secondary fw-light">/mo</small></h1>
-                  <ul class="list-unstyled mt-3 mb-4">
-                    <li>30 users included</li>
-                    <li>15 GB of storage</li>
-                    <li>Phone and email support</li>
-                    <li>Help center access</li>
-                  </ul>
-                  <button type="button" class="w-100 btn btn-lg btn-primary">Contact us</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="container marketing" id = "testimonials">
-
-            <!-- Three columns of text below the carousel -->
-            <div class="row">
-              <div class="col-lg-4">
-                <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
-                <h2 class="fw-normal">Heading</h2>
-                <p>Some representative placeholder content for the three columns of text below the carousel. This is the first column.</p>
-                <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-              </div><!-- /.col-lg-4 -->
-              <div class="col-lg-4">
-                <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
-                <h2 class="fw-normal">Heading</h2>
-                <p>Another exciting bit of representative placeholder content. This time, we've moved on to the second column.</p>
-                <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-              </div><!-- /.col-lg-4 -->
-              <div class="col-lg-4">
-                <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
-                <h2 class="fw-normal">Heading</h2>
-                <p>And lastly this, the third column of representative placeholder content.</p>
-                <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-              </div><!-- /.col-lg-4 -->
-            </div><!-- /.row -->
-
-            <footer id = "contact">
-                <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
-                    <p>&copy; 2024 Company, Inc. All rights reserved.</p>
-                    <ul class="list-unstyled d-flex">
-                      <li class="ms-3"><a class="link-body-emphasis" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"/></svg></a></li>
-                      <li class="ms-3"><a class="link-body-emphasis" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
-                      <li class="ms-3"><a class="link-body-emphasis" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
-                    </ul>
+          <section id="features" class="features-section py-5 bg-white">
+            <div class="container">
+              <h2 class="text-center mb-5 fw-bold">Our Awesome Features</h2>
+              
+              <div class="row g-4">
+                <div class="col-md-4">
+                  <div class="feature-card text-center p-4 border rounded">
+                    <div class="feature-icon bg-primary text-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                      <i class="bi bi-collection fs-2"></i>
+                    </div>
+                    <h3 class="h4 mb-3">Quality Milk</h3>
+                    <p class="text-muted">Detailed description of the first amazing feature that makes our product unique.</p>
+                    <a href="#" class="btn btn-outline-primary">Learn More</a>
                   </div>
-            </footer>
+                </div>
+                
+                <div class="col-md-4">
+                  <div class="feature-card text-center p-4 border rounded">
+                    <div class="feature-icon bg-primary text-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                      <i class="bi bi-people fs-2"></i>
+                    </div>
+                    <h3 class="h4 mb-3">Comparable Prices</h3>
+                    <p class="text-muted">Another incredible feature that demonstrates the power and versatility of our solution.</p>
+                    <a href="#" class="btn btn-outline-primary">Learn More</a>
+                  </div>
+                </div>
+                
+                <div class="col-md-4">
+                  <div class="feature-card text-center p-4 border rounded">
+                    <div class="feature-icon bg-primary text-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                      <i class="bi bi-tools fs-2"></i>
+                    </div>
+                    <h3 class="h4 mb-3">Home Delivery</h3>
+                    <p class="text-muted">The third standout feature that sets us apart from the competition.</p>
+                    <a href="#" class="btn btn-outline-primary">Learn More</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="pricing" class="pricing-section py-5 bg-light">
+            <div class="container">
+              <h2 class="text-center mb-5 fw-bold">Simple, Transparent Pricing</h2>
+              
+              <div class="row g-4">
+                <div class="col-md-4">
+                  <div class="card h-100 shadow-sm border-0">
+                    <div class="card-header bg-primary text-white text-center py-3">
+                      <h4 class="my-0 fw-normal">Daily</h4>
+                    </div>
+                    <div class="card-body text-center">
+                      <h1 class="card-title pricing-card-title mb-3">50 <small class="text-muted">/ lit</small></h1>
+                      <ul class="list-unstyled mb-4">
+                        <li>1 liter</li>
+                        <li>50 Rupees</li>
+                        <li>Delivery Charges Applied</li>
+                      </ul>
+                      <a href="#" class="btn btn-outline-primary w-100">Buy</a>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col-md-4">
+                  <div class="card h-100 shadow-sm border-0 border-primary">
+                    <div class="card-header bg-primary text-white text-center py-3">
+                      <h4 class="my-0 fw-normal">Monthly</h4>
+                    </div>
+                    <div class="card-body text-center">
+                      <h1 class="card-title pricing-card-title mb-3">45 <small class="text-muted">/ lit</small></h1>
+                      <ul class="list-unstyled mb-4">
+                        <li>1 Liter</li>
+                        <li>1400 Rupees</li>
+                        <li>Free Delivery</li>
+                      </ul>
+                      <a href="#" class="btn btn-primary w-100">Buy</a>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col-md-4">
+                  <div class="card h-100 shadow-sm border-0">
+                    <div class="card-header bg-primary text-white text-center py-3">
+                      <h4 class="my-0 fw-normal">Yearly</h4>
+                    </div>
+                    <div class="card-body text-center">
+                      <h1 class="card-title pricing-card-title mb-3">$40 <small class="text-muted">/ lit</small></h1>
+                      <ul class="list-unstyled mb-4">
+                        <li>1 Liter</li>
+                        <li>15000 Rupees</li>
+                        <li>Free Delivery</li>
+                      </ul>
+                      <a href="#" class="btn btn-outline-primary w-100">Buy</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+      <section id="testimonials" class="testimonials-section py-5 bg-white">
+        <div class="container">
+          <h2 class="text-center mb-5 fw-bold">What Our Customers Say</h2>
+          
+          <div class="row g-4">
+            <div class="col-md-4">
+              <div class="testimonial-card card h-100 shadow-sm border-0">
+                <div class="card-body text-center">
+                  <img src="{% static 'images/placeholder-avatar.jpg' %}" alt="Customer" class="rounded-circle mb-3" width="120" height="120">
+                  <h4 class="card-title mb-3">John Doe</h4>
+                  <p class="card-text text-muted mb-3">"An incredible service that transformed our workflow!"</p>
+                  <div class="stars text-warning mb-2">★★★★★</div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-md-4">
+              <div class="testimonial-card card h-100 shadow-sm border-0">
+                <div class="card-body text-center">
+                  <img src="{% static 'images/placeholder-avatar.jpg' %}" alt="Customer" class="rounded-circle mb-3" width="120" height="120">
+                  <h4 class="card-title mb-3">Jane Smith</h4>
+                  <p class="card-text text-muted mb-3">"Easy to use and incredibly powerful!"</p>
+                  <div class="stars text-warning mb-2">★★★★☆</div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-md-4">
+              <div class="testimonial-card card h-100 shadow-sm border-0">
+                <div class="card-body text-center">
+                  <img src="{% static 'images/placeholder-avatar.jpg' %}" alt="Customer" class="rounded-circle mb-3" width="120" height="120">
+                  <h4 class="card-title mb-3">Mike Johnson</h4>
+                  <p class="card-text text-muted mb-3">"Great support and amazing features!"</p>
+                  <div class="stars text-warning mb-2">★★★★★</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer id="contact" class="bg-light py-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4">
+              <h5 class="mb-3">JJ Diaries</h5>
+              <p class="text-muted">Connect with us and transform your experience.</p>
+            </div>
+            
+            <div class="col-md-4">
+              <h5 class="mb-3">Quick Links</h5>
+              <ul class="list-unstyled">
+                <li><a href="#" class="text-muted">Home</a></li>
+                <li><a href="#features" class="text-muted">Features</a></li>
+                <li><a href="#pricing" class="text-muted">Pricing</a></li>
+                <li><a href="#testimonials" class="text-muted">Testimonials</a></li>
+              </ul>
+            </div>
+            
+            <div class="col-md-4">
+              <h5 class="mb-3">Connect</h5>
+              <div class="social-links">
+                <a href="#" class="text-muted me-3"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="text-muted me-3"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="text-muted me-3"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="text-muted"><i class="bi bi-linkedin"></i></a>
+              </div>
+              <p class="text-muted mt-3">&copy; 2024 JJ Diaries. All Rights Reserved.</p>
+            </div>
+          </div>
+        </div>
+      </footer>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
