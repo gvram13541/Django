@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Placed</title>
+</head>
+<body>
+    <h1>Order Placed Successfully!</h1>
+    <p>Thank you for your order, {{ request.user.username }}.</p>
+    <h2>Order Details</h2>
+    <ul>
+        {% load custom_filters %}
+        {% for order in orders %}
+            <li>
+                Product: {{ order.product.name }}<br>
+                Quantity: {{ order.quantity }}<br>
+                Price: ${{ order.product.price|floatformat:2 }}<br>
+                Subtotal: ${{ order.quantity|multiply:order.product.price|floatformat:2 }}<br>
+            </li>
+        {% endfor %}
+    </ul>
+    <h3>Total Cost: ${{ total_cost|floatformat:2 }}</h3>
+    <a href="{% url 'buyer_home' %}">Continue Shopping</a>
+</body>
+</html>

@@ -11,5 +11,21 @@
             {% csrf_token %}
             <button type="submit" class="btn btn-outline-primary">Logout</button>
         </form>
+        <div>
+            <h2>Products</h2>
+            <ul>
+                {% for product in products %}
+                    <li>
+                        <a href="{% url 'product_detail' product.id %}">{{ product.name }}</a>
+                        <a href="{% url 'add_to_cart' product.id %}"> Add to Cart </a>
+                        <a href="{% url 'remove_from_cart' product.id %}"> Remove from Cart </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div>
+        <div>
+            <a href="{% url 'view_cart'%}"> View Cart </a>
+        </div>
     </body>
 </html>

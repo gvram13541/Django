@@ -57,7 +57,7 @@ class Product(models.Model):
     name = models.CharField(max_length=200)
     price = models.FloatField()
     description = models.TextField()
-    image = models.ImageField()
+    image = models.ImageField(upload_to='images')
     quantity = models.FloatField()
     
     def __str__(self):

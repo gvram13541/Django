@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>cart</title>
+    </head>
+    <body>
+        <h1>Items in cart</h1>
+        <div>
+            <ul>
+                {% for product in products %}
+                    <li>
+                        <a href="{% url 'product_detail' product.id %}">{{ product.name }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div>
+            <a href="{% url 'place_order' %}"> Place Order </a>
+    </body>
+</html>
