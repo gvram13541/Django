@@ -99,6 +99,7 @@ h1, h2, h3, h4, h5 {
         transparent 70%
     );
     z-index: 1;
+    color: var(--dark-color);
 }
 
 /* Feature Cards */
@@ -162,13 +163,13 @@ h1, h2, h3, h4, h5 {
 
 /* Footer */
 footer {
-    background-color: var(--dark-color);
-    color: var(--light-color);
+    /* background-color: var(--dark-color); */
+    color: var(--secondary-color);
     padding: 4rem 0;
 }
 
 footer a {
-    color: var(--light-color);
+    color: var(--dark-color);
     text-decoration: none;
     transition: color 0.3s ease;
 }

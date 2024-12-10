@@ -94,35 +94,42 @@ def view_cart(request):
 
 @login_required
 def place_order(request):
-    cart = request.session.get('cart', {})
-    
-    if not cart:
-        messages.error(request, 'Your cart is empty.')
-        return redirect('buyer_home')
-    
-    orders = []
-    total_cost = 0
-    for product_id, quantity in cart.items():
-        product = Product.objects.get(id=product_id)
-        if product.quantity < quantity:
-            messages.error(request, f'Not enough stock available for {product.name}')
-            return redirect('buyer_home')
-        product.quantity -= quantity
-        product.save()
-        order = Order(customer=request.user, product=product, quantity=quantity)
-        order.save()
-        orders.append(order)
-        total_cost += product.price * quantity
-    
-    request.session['cart'] = {}
-    messages.success(request, 'Order placed successfully!')
-    return render(request, 'customers/order_placed.html', {'orders': orders, 'total_cost': total_cost})
+    if request.method == 'POST':
+        selected_product = Product.objects.get(id=request.POST['product_id'])
+        selected_quantity = float(request.POST['quantity'])
+        
+        order = Order.objects.create(
+            customer=request.user.customer,
+            product=selected_product,
+            quantity=selected_quantity,
+            status=False  
+        )
+        
+        request.session['order_id'] = order.id
+        return redirect('order_confirmed')
+    else:
+        products = Product.objects.all()
+        return render(request, 'customers/order_placed.html', {'products': products})
 
 @login_required
 def order_summary(request):
-    orders = Order.objects.filter(user=request.user, status='pending')
+    orders = Order.objects.filter(customer=request.user, status=False)  # status should be a boolean
     total_cost = sum(order.product.price * order.quantity for order in orders)
     return render(request, 'customers/order_summary.html', {'orders': orders, 'total_cost': total_cost})
+
+@login_required
+def order_confirmed(request):
+    try:
+        order_id = request.session.get('order_id')
+        if order_id:
+            order = Order.objects.get(id=order_id)
+            order.status = True  # Set status to True to mark as confirmed
+            order.save()
+            return render(request, 'customers/order_confirmed.html')
+        else:
+            return redirect('buyer_home')
+    except Order.DoesNotExist:
+        return redirect('buyer_home')
     
 
 # def login(request):
