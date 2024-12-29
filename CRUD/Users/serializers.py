@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
+from django.contrib.auth import authenticate
 
 class CreateUserSerializer(serializers.ModelSerializer):
     password1 = serializers.CharField(write_only=True)
@@ -7,7 +8,7 @@ class CreateUserSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = User
-        fields = ['username', 'email', 'password1', 'password2']
+        fields = ['id', 'username', 'email', 'password1', 'password2']
         
     def create(self, validated_data):
         password1 = validated_data.pop('password1')
@@ -41,5 +42,20 @@ class CreateUserSerializer(serializers.ModelSerializer):
         instance.save()
         
         return instance
-        
-        
+    
+    
+class LoginSerializer(serializers.Serializer):
+    """
+        user login seriallizer
+        we need not sepcify Meta class here because we are not associating our login serializer to any model
+        or use class meta when your serializer is extending ModelSerializer
+    """
+    username = serializers.CharField()
+    password = serializers.CharField()
+    
+    def validate(self, data):
+        user = authenticate(username=data['username'], password=data['password'])
+        if user is None:
+            raise serializers.ValidationError("Invalid Username or Password")
+        return user
+    
